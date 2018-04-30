@@ -49,7 +49,7 @@ public class EmployeeJPATest {
     public void should_return_employee_given_character_in_name_and_salary_large_than() throws Exception {
         //2.找出Employee表中第一个姓名包含`n`字符的雇员所有个人信息
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,1, 1);
-        String actualName = null;
+        String actualName = employeeRepository.findFirstByNameContainingAndSalaryGreaterThan().getName();
         assertThat(actualName).isEqualTo(expectedEmployee.getName());
     }
 
@@ -81,7 +81,7 @@ public class EmployeeJPATest {
     public void should_return_influence_lines_when_update_employee_name() throws Exception {
         //6.将xiaohong的名字改成xiaobai,输出这次修改影响的行数
         Integer expectedLine = 1;
-        Integer actualLine = null;
+        Integer actualLine = employeeRepository.modifyName("xiaobai","xiaohong");
         assertThat(actualLine).isEqualTo(expectedLine);
     }
 
@@ -89,7 +89,10 @@ public class EmployeeJPATest {
     public void should_deleted_employee_when_given_employee_name() throws Exception {
         //7.删除姓名是xiaohong的employee
         Employee expectedEmployee = new Employee("xiaohong",19,"female",7000,1, 1);
-        Employee actualEmployee = null;
+
+        employeeRepository.deleteByName("xiaohong");
+        Employee actualEmployee = employeeRepository.findFirstByName("xiaohong");
+
         assertThat(actualEmployee).isNull();
     }
 }

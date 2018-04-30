@@ -2,6 +2,8 @@ package com.example.employee.repository;
 
 import com.example.employee.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -12,7 +14,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findFirstByName(String name);
 
     //2.找出Employee表中第一个姓名包含`*`字符并且薪资大于*的雇员个人信息
-    Employee findByFirstNameContainingAndSalaryGreaterThan();
+    Employee findFirstByNameContainingAndSalaryGreaterThan();
 
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
 
@@ -21,6 +23,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //5.查找**的所在的公司的公司名称
 
     //6.将*的名字改成*,输出这次修改影响的行数
+    @Query(value = "update Employee e set e.name=?1 where e.name=?2 ", nativeQuery = true)
+    @Modifying
+    int modifyName(String newName,String oldName);
+
 
     //7.删除姓名是*的employee
+    Employee deleteByName(String name);
 }
