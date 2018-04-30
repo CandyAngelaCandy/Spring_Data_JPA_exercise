@@ -14,6 +14,16 @@ public class Employee {
     private Integer companyId;
     private Integer salary;
 
+    public Employee(String name,Integer age,
+                    String gender,Integer salary,Integer id,Integer companyId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.companyId = companyId;
+        this.salary = salary;
+    }
+
     public Integer getId() {
         return id;
     }
