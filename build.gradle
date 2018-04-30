@@ -24,6 +24,9 @@ repositories {
     maven {
         url "http://ec2-54-222-235-15.cn-north-1.compute.amazonaws.com.cn:8081/repository/maven-central/"
     }
+    maven {
+        url 'https://repo.spring.io/libs-release'
+    }
 }
 
 configurations {
@@ -33,5 +36,12 @@ configurations {
 dependencies {
     runtime('mysql:mysql-connector-java')
     compile('org.springframework.boot:spring-boot-starter-web')
+
+    // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
+    compile ('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    // Use MySQL Connector-J
+    compile ('mysql:mysql-connector-java')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
