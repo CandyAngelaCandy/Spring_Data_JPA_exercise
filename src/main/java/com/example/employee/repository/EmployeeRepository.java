@@ -20,7 +20,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     //3.找出一个薪资最高且公司ID是*的雇员以及该雇员的姓名
     @Query(value = "select e.name from Employee e where e.companyId = ?1  order by salary DESC limit 1;",nativeQuery = true)
-    Employee findHighestSalaryEmployeeInCompanyId(Integer companyId);
+    Employee findHighestSalaryInCompanyName(Integer companyId);
 
     //4.实现对Employee的分页查询，每页两个数据
     @Override
