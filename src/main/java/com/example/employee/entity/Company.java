@@ -17,6 +17,10 @@ public class Company {
         this.employeesNumber = employeesNumber;
     }
 
+    public Company() {
+
+    }
+
     public Integer getId() {
         return id;
     }
